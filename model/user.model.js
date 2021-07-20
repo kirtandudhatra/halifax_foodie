@@ -1,5 +1,3 @@
-const fs = require('fs');
-const Utils = require('../lib/Utils');
 const db = require('../lib/db-connection');
 
 class UserModel{
@@ -14,6 +12,7 @@ class UserModel{
                     if (err) {
                         reject();
                     } else {
+                        console.log("Added user:", JSON.stringify(data));
                         resolve();
                     }
                 });
