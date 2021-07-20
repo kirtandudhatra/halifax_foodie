@@ -1,0 +1,17 @@
+.bold{
+    font-weight: bold;
+}
+td{
+    padding: 10px;
+}
+table{
+    height: 100%;
+    width: 100%;
+}
+.rest-card{
+    height: 40%;
+    width: 80%;
+    margin: auto;
+    margin-top: 20px;
+    cursor: pointer;
+}

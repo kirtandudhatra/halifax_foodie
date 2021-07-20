@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UtilityService } from './services/utility.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'HalifaxFoodie';
+  constructor(public utilityservice: UtilityService){}
 }

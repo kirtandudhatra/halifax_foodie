@@ -24,6 +24,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -87,6 +88,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -120,5 +122,8 @@
       }
     }
   },
-  "defaultProject": "HalifaxFoodie"
+  "defaultProject": "HalifaxFoodie",
+  "cli": {
+    "analytics": "b60bcd55-0eea-4a23-be9f-a3caad41f70d"
+  }
 }

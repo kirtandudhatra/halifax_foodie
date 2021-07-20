@@ -5,8 +5,9 @@ class Users {
     static async placeOrder(req, res) {
         try {
             const reqData = req.body;
-
-            await OrderModel.placeOrder(reqData);
+            
+            console.log(reqData)
+            //await OrderModel.placeOrder(reqData);
             return res.sendResponse({
                 success: true,
                 message: 'User updated'
