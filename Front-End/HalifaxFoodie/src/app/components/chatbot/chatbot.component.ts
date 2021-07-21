@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HttpService } from 'src/app/services/http.service';
 
 @Component({
   selector: 'app-chatbot',
@@ -7,21 +8,59 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./chatbot.component.css']
 })
 export class ChatbotComponent implements OnInit {
-  chatMessages: any [] = []
-  chatBotFormGroup:FormGroup
+  chatMessages: Array<any> = [{
+    Owner: 'ChatBot',
+    Message: 'Hello, I can help you order flowers'
+  }];
+  chatBotFormGroup: FormGroup
+  lexUserId: any = 'userID' + Date.now();
+  sessionAttributes = {};
+  @ViewChild('dvMsg') dvMsg: ElementRef;
 
-  constructor(private _formBuilder: FormBuilder) { }
+  constructor(private httpservice: HttpService, private _formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.chatBotFormGroup = this._formBuilder.group({
-      message: ['', Validators.required],
+      message: [''],
 
     });
 
 
   }
 
-  send(){
+  send() {
+    if (!this.chatBotFormGroup.value.message) {
+      return
+    }
 
+    console.log(this.dvMsg.nativeElement.scrollTop)
+    console.log(this.dvMsg.nativeElement.scrollHeight)
+    this.chatMessages.push({ Owner: 'You', Message: this.chatBotFormGroup.value.message });
+    let req = {
+      lexUserId: this.lexUserId,
+      chatInput: this.chatBotFormGroup.value.message,
+      sessionAttributes: this.sessionAttributes
+    }
+    this.chatBotFormGroup.setValue({ message: "" })
+    this.httpservice.postServiceCall("/chat/send", req)
+      .subscribe((result: any) => {
+        console.log(result)
+        if (result.success) {
+          this.sessionAttributes = result.data.sessionAttributes
+          result.data.chat.forEach(o => {
+            this.chatMessages.push(o)
+          });
+        }
+      }, (error) => {
+        console.log(error)
+      })
   }
+  ngAfterViewChecked() {        
+} 
+
+scrollToBottom(): void {
+    try {
+      this.dvMsg.nativeElement.scrollTop = this.dvMsg.nativeElement.scrollHeight;
+    } catch(err) { }                 
+}
 }

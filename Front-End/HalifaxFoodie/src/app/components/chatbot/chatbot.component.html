@@ -1,11 +1,20 @@
-<p *ngFor= 'let m of chatMessages' class="{{m.Owner}}">{{m.Owner}}: {{m.Message}}</p>
-
-<form [formGroup]="chatBotFormGroup" (submit)="send()">
-    <mat-form-field appearance="fill">
-        <input matInput formControlName="message" placeholder="Type a message..." required>
-    </mat-form-field>
-
-    <div>
-        <button mat-button type="submit">Send</button>
+<div style="height: 100%;">
+    <div style="height: 69%; overflow-y: auto;" name="dvMsg" #dvMsg [scrollTop]="dvMsg.scrollHeight">
+        <div>
+            <p *ngFor='let m of chatMessages' class="{{m.Owner}}">{{m.Owner}}: {{m.Message}}</p>
+        </div>
     </div>
-</form>
+    <form [formGroup]="chatBotFormGroup" (submit)="send()" style="height: 20%;">
+        <mat-form-field appearance="fill" style="
+    width: 90%;
+    margin-left: 5%;
+">
+            <input matInput formControlName="message" placeholder="Type a message..." required>
+        </mat-form-field>
+
+        <div>
+            <button mat-button type="submit">Send</button>
+        </div>
+    </form>
+
+</div>
