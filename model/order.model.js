@@ -15,7 +15,7 @@ class OrderModel{
                         console.log('Error in order model: placeOrder: ', err);
                         reject();
                     } else {
-                        resolve();
+                        resolve(orderData.orderId);
                     }
                 });
 

@@ -6,6 +6,7 @@ import { CartComponent } from './components/cart/cart.component';
 import { FeedbackAnalysisComponent } from './components/feedback-analysis/feedback-analysis.component';
 import { FeedbackComponent } from './components/feedback/feedback.component';
 import { MainComponent } from './components/main/main.component';
+import { MessengerComponent } from './components/messenger/messenger.component';
 import { OrderComponent } from './components/order/order.component';
 import { RegisterComponent } from './components/register/register.component';
 import { RestrauntComponent } from './components/restraunt/restraunt.component';
@@ -24,6 +25,7 @@ const routes: Routes = [
     { path: 'add-rest', component: AddRestaurantComponent },
     { path: 'feedback', component: FeedbackComponent },
     { path: 'feedback-analysis', component: FeedbackAnalysisComponent },
+    { path: 'connect', component: MessengerComponent },
   ]}
 ];
 

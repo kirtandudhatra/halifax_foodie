@@ -2,6 +2,13 @@
 
 <form (submit)="submit()" [formGroup]="FeedbackForm" style="padding-left: 20%;">
     <mat-form-field appearance="fill">
+        <mat-label>Dish</mat-label>
+        <mat-select formControlName="food">
+          <mat-option *ngFor="let dish of foodList" [value]="dish.name">{{dish.name}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="FeedbackForm?.controls['food']?.errors?.required">Please seleect a dish</mat-error>
+      </mat-form-field>
+    <mat-form-field appearance="fill">
         <mat-label>Rating</mat-label>
         <mat-select formControlName="rating">
             <mat-option *ngFor="let rate of rating" [value]="rate">{{rate}}</mat-option>

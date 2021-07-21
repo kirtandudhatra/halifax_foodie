@@ -19,14 +19,12 @@ class ChatBotController {
                     if(data.message.includes('{"messages":[')){
                         let temp = JSON.parse(data.message)
                         for(let i in temp.messages){
-                            console.log(temp.messages[i].value)
-                            ch.push({Owner: 'Chatbot', Message: temp.messages[i].value})
+                            ch.push({Owner: 'ChatBot', Message: temp.messages[i].value})
                         }
                     }
                     else{
-                        ch.push({Owner: 'Chatbot', Message: data.message})
+                        ch.push({Owner: 'ChatBot', Message: data.message})
                     }
-                    console.log((data.message))
                    let dt = {
                        sessionAttributes : data.sessionAttributes,
                        chat : ch

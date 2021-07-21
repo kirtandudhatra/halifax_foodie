@@ -14,6 +14,8 @@ export class FeedbackComponent implements OnInit {
   restCode: string
   FeedbackForm!: FormGroup;
   rating : any = [1,2,3,4,5]
+  foodList: any[] = [{name: "Burger", price: 2},{name: "Pizza", price: 1},{name: "Noodles", price: 3}];
+
   constructor(private httpservice: HttpService, private formBuilder: FormBuilder, private dataservice: DataService, private router: Router) { }
 
   ngOnInit(): void {
@@ -23,6 +25,7 @@ export class FeedbackComponent implements OnInit {
     this.restName = this.dataservice.selectedRest
     this.restCode = this.dataservice.selectedRestCode
     this.FeedbackForm = this.formBuilder.group({
+      food: ['', [Validators.required]],
       rating: ['', [Validators.required]],
       feedback: ['', [Validators.required]],
     });
@@ -33,12 +36,12 @@ export class FeedbackComponent implements OnInit {
     let req = {
       restCode: this.restCode,
       rating: this.FeedbackForm.value.rating,
-      feedback: this.FeedbackForm.value.feedback
+      feedback: this.FeedbackForm.value.food.toUpperCase() + " - "+this.FeedbackForm.value.feedback
     }
     if(this.FeedbackForm.invalid){
       return
     }
-    this.httpservice.postServiceCall("/feedback/save",req)
+    this.httpservice.postServiceCall("/feedback/create",req)
     .subscribe((result: any)=>{
       console.log(result)
       if(result.success){

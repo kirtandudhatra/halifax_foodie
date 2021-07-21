@@ -16,16 +16,16 @@ export class ChatbotComponent implements OnInit {
   lexUserId: any = 'userID' + Date.now();
   sessionAttributes = {};
   @ViewChild('dvMsg') dvMsg: ElementRef;
-
+  
   constructor(private httpservice: HttpService, private _formBuilder: FormBuilder) { }
 
+  naviagte(){
+    alert("called")
+  }
   ngOnInit(): void {
     this.chatBotFormGroup = this._formBuilder.group({
       message: [''],
-
     });
-
-
   }
 
   send() {
@@ -55,12 +55,13 @@ export class ChatbotComponent implements OnInit {
         console.log(error)
       })
   }
-  ngAfterViewChecked() {        
-} 
 
-scrollToBottom(): void {
-    try {
-      this.dvMsg.nativeElement.scrollTop = this.dvMsg.nativeElement.scrollHeight;
-    } catch(err) { }                 
-}
+  reset(){
+    this.chatMessages = [{
+      Owner: 'ChatBot',
+      Message: 'Hello, I can help you order flowers'
+    }];
+    this.chatBotFormGroup.setValue({ message: "" })
+
+  }
 }

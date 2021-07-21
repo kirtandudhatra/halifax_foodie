@@ -6,10 +6,11 @@ class OrderController {
         try {
             const reqData = req.body;
 
-            await OrderModel.placeOrder(reqData);
+            const orderId = await OrderModel.placeOrder(reqData);
             return res.sendResponse({
                 success: true,
-                message: 'Order Placed'
+                message: 'Order Placed',
+                data: orderId
             });
 
         } catch (error) {

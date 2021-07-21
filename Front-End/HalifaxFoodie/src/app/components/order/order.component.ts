@@ -60,16 +60,21 @@ export class OrderComponent implements OnInit {
       return
     }
     else{
+      var statList = ['Order Placed', 'Order Dispatched', 'Order Delivered', 'Order Ready','Order Placed', 'Order Dispatched', 'Order Delivered', 'Order Ready','Order Placed', 'Order Dispatched', 'Order Delivered', 'Order Ready','Order Placed', 'Order Dispatched', 'Order Delivered', 'Order Ready']
+      const statListLength = statList.length;
+      var stat = statList[(Math.floor(Math.random() * statListLength))];
+      
       let req = {
         restName: this.restName,
         orderList: this.orderList,
-        totalPrice: this.totalPrice
+        totalPrice: this.totalPrice,
+        status: stat
       }
       this.httpservice.postServiceCall("/order/placeorder",req)
       .subscribe((result: any)=>{
         console.log(result)
         if(result.success){
-          alert("Order Successfully Placed.")
+          alert("Order Successfully Placed. Your order number is " + result.data)
           this.router.navigateByUrl('/main/restraunt')
         }
         else{

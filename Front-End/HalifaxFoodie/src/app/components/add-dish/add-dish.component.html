@@ -1,12 +1,12 @@
 <h2>Add Dish</h2>
 <mat-form-field class="restList" appearance="fill" *ngIf="showRestList">
-    <mat-label>Restaurant</mat-label>
-    <mat-select [(ngModel)]="restCode">
-      <mat-option *ngFor="let rest of restList" [value]="rest.code">
-        {{rest.name}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+      <mat-label>Restaurant</mat-label>
+      <mat-select [(ngModel)]="restCode">
+        <mat-option *ngFor="let rest of restList" [value]="rest.code">
+          {{rest.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
 <form [formGroup]="AddDishFormGroup" (submit)="Add()">
     <ng-template matStepLabel>Security Question</ng-template>

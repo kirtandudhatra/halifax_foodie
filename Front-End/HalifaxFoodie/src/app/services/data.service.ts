@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class DataService {
   selectedRest: string = ""
-  selectedRestCode: any 
+  selectedRestCode: string = "" 
   userData: any
   UserRole: string
   constructor() { }
