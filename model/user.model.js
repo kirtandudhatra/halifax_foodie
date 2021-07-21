@@ -10,6 +10,7 @@ class UserModel{
                 };
                 db.put(params, function(err, data) {
                     if (err) {
+                        console.error('Error in user model: register', err);
                         reject();
                     } else {
                         console.log("Added user:", JSON.stringify(data));
@@ -18,7 +19,7 @@ class UserModel{
                 });
 
             } catch (error) {
-                console.error('Error in model register', error);
+                console.error('Error in user model: register', error);
                 reject();
             }
         });
@@ -31,18 +32,17 @@ class UserModel{
                     TableName: "users",
                     Key: query
                 };
-                console.log(params);
                 db.get(params, function(err, data) {
                     if (err) {
+                        console.error('Error in user model: getUserData', err);
                         reject();
                     } else {
-                        console.log("Added user:", JSON.stringify(data));
                         resolve(data["Item"]);
                     }
                 });
 
             } catch (error) {
-                console.error('Error in model getUserData', error);
+                console.error('Error in user model: getUserData', error);
                 reject();
             }
         });
