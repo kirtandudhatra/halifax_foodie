@@ -1,1 +1,11 @@
-<p>chatbot works!</p>
+<p *ngFor= 'let m of chatMessages' class="{{m.Owner}}">{{m.Owner}}: {{m.Message}}</p>
+
+<form [formGroup]="chatBotFormGroup" (submit)="send()">
+    <mat-form-field appearance="fill">
+        <input matInput formControlName="message" placeholder="Type a message..." required>
+    </mat-form-field>
+
+    <div>
+        <button mat-button type="submit">Send</button>
+    </div>
+</form>

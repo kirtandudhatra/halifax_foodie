@@ -27,7 +27,9 @@
   </mat-toolbar>
 
   <mat-sidenav-container class="sidenav-container">
-    <mat-sidenav class="sidenav" [opened]="openChat" mode="side" position="end">End content</mat-sidenav>
+    <mat-sidenav class="sidenav" [opened]="openChat" mode="side" position="end">
+      <app-chatbot></app-chatbot>
+    </mat-sidenav>
     <div>
         <router-outlet></router-outlet>
     </div>

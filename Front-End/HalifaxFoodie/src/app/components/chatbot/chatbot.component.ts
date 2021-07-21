@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-chatbot',
@@ -6,10 +7,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./chatbot.component.css']
 })
 export class ChatbotComponent implements OnInit {
+  chatMessages: any [] = []
+  chatBotFormGroup:FormGroup
 
-  constructor() { }
+  constructor(private _formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+    this.chatBotFormGroup = this._formBuilder.group({
+      message: ['', Validators.required],
+
+    });
+
+
   }
 
+  send(){
+
+  }
 }

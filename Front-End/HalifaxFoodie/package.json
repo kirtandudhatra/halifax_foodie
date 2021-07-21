@@ -24,7 +24,6 @@
     "@angular/router": "~11.0.3",
     "firebase": "^8.7.1",
     "rxjs": "~6.6.0",
-    "sendmail": "^1.6.1",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
   },
