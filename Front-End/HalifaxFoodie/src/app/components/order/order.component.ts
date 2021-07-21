@@ -60,7 +60,12 @@ export class OrderComponent implements OnInit {
       return
     }
     else{
-      this.httpservice.postServiceCall("/order/placeorder",this.orderList)
+      let req = {
+        restName: this.restName,
+        orderList: this.orderList,
+        totalPrice: this.totalPrice
+      }
+      this.httpservice.postServiceCall("/order/placeorder",req)
       .subscribe((result: any)=>{
         console.log(result)
         if(result.success){

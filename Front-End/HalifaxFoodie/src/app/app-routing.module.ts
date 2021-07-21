@@ -1,6 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AddDishComponent } from './components/add-dish/add-dish.component';
+import { AddRestaurantComponent } from './components/add-restaurant/add-restaurant.component';
 import { CartComponent } from './components/cart/cart.component';
+import { FeedbackAnalysisComponent } from './components/feedback-analysis/feedback-analysis.component';
+import { FeedbackComponent } from './components/feedback/feedback.component';
 import { MainComponent } from './components/main/main.component';
 import { OrderComponent } from './components/order/order.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -16,6 +20,10 @@ const routes: Routes = [
     { path: 'restraunt', component: RestrauntComponent },
     { path: 'orders', component: OrderComponent },
     { path: 'cart', component: CartComponent },
+    { path: 'add-dish', component: AddDishComponent },
+    { path: 'add-rest', component: AddRestaurantComponent },
+    { path: 'feedback', component: FeedbackComponent },
+    { path: 'feedback-analysis', component: FeedbackAnalysisComponent },
   ]}
 ];
 

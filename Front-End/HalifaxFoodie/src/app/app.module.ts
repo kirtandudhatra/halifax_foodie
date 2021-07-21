@@ -26,6 +26,13 @@ import { MatButtonModule } from '@angular/material/button';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatSelectModule} from '@angular/material/select';
 import { HttpClientModule } from '@angular/common/http';
+import {MatStepperModule} from '@angular/material/stepper';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { environment } from '../environments/environment';
+import { AddRestaurantComponent } from './components/add-restaurant/add-restaurant.component';
+import { AddDishComponent } from './components/add-dish/add-dish.component';
 
 @NgModule({
   declarations: [
@@ -40,13 +47,16 @@ import { HttpClientModule } from '@angular/common/http';
     OrderComponent,
     FeedbackComponent,
     FeedbackAnalysisComponent,
-    RecipeUploaderComponent
+    RecipeUploaderComponent,
+    AddRestaurantComponent,
+    AddDishComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatCardModule,
+    MatStepperModule,
     MatProgressSpinnerModule,
     MatToolbarModule,
     MatInputModule,
@@ -56,7 +66,11 @@ import { HttpClientModule } from '@angular/common/http';
     MatSelectModule,
     FormsModule, 
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule,
+    AngularFireAuthModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
