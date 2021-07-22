@@ -25,7 +25,7 @@ const routes: Routes = [
     { path: 'add-rest', component: AddRestaurantComponent },
     { path: 'feedback', component: FeedbackComponent },
     { path: 'feedback-analysis', component: FeedbackAnalysisComponent },
-    { path: 'connect', component: MessengerComponent },
+    { path: 'connect/:id', component: MessengerComponent },
   ]}
 ];
 

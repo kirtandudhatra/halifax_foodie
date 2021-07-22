@@ -14,23 +14,30 @@
       <button mat-button class="menu-button" [routerLink]="'/main/feedback-analysis'">
         Feedback Analysis
       </button>
-      <!-- <button mat-button class="menu-button" [routerLink]="'/main/add-dish'">
-        Add Dish
-      </button> -->
+      <button mat-button class="menu-button" [routerLink]="'/main/connect/z0zpkyl0MhRL3hrfr8gQ'">
+        go to chat
+      </button>
+      <button mat-button class="menu-button" (click)="createChat()">
+        Create Chat
+      </button>
+      <button mat-button class="menu-button" (click)="getChat()">
+        Get Chat
+      </button>
           <span class="spacer"></span>
-    <!-- <button mat-icon-button  [routerLink]="'/main/cart'">
-        <mat-icon>add_shopping_cart</mat-icon>
-    </button> -->
+
     <button mat-icon-button (click)="openChat = !openChat">
         <mat-icon> chat_bubble_outline</mat-icon>
     </button>
+    <button mat-icon-button  (click)="logout()">
+      <mat-icon>add_shopping_cart</mat-icon>
+  </button>
   </mat-toolbar>
 
   <mat-sidenav-container class="sidenav-container">
     <mat-sidenav class="sidenav" [opened]="openChat" mode="side" position="end">
       <app-chatbot></app-chatbot>
     </mat-sidenav>
-    <div>
+    <div style="height: 100%;">
         <router-outlet></router-outlet>
     </div>
   </mat-sidenav-container>

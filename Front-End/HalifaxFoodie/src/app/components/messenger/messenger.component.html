@@ -1,1 +1,53 @@
-<p>messenger works!</p>
+<ng-container *ngIf="chat$ | async as chat" style="height: 100%;">
+  <!-- <ng-container *ngIf=" auth.user$ | async as user"> -->
+  <div style="height: 100%;">
+    <div class="top">
+      <p><a class="tag" routerLink="/">Back</a>
+        <span class="tag is-success">
+          https://firestore-megachat.firebaseapp.com/chats/{{ chat.id }}
+        </span>
+      </p>
+    </div>
+
+
+    <div style="height: 69%; overflow-y: auto;" name="dvMsg" #dvMsg [scrollTop]="dvMsg.scrollHeight">
+
+      <div class="msg animated zoomInUp" *ngFor="let msg of chat.messages; trackBy: trackByCreated">
+
+        <div class="{{ msg?.uid == user.userId? 'Me': 'Representative' }}" *ngIf="msg && msg.uid">
+          <span class="tag is-dark">{{ msg?.uid == user.userId? 'Me': 'Representative' }}</span>
+          <span class="spacer"></span>
+
+          <button mat-icon-button class="delete-button" *ngIf="chat.uid === user.userId || msg.uid === user.userId"
+            (click)="cs.deleteMessage(chat, msg)">
+            <mat-icon> delete</mat-icon>
+          </button>
+          <br>
+          <p *ngIf="msg && msg.uid">{{ msg.content }}</p>
+        </div>
+
+
+      </div>
+
+
+
+    </div>
+    <form #f="ngForm" (submit)="submit(chat.id)" style="height: 20%; margin-top: 15px;">
+      <mat-form-field appearance="fill" style="width: 41.5%;margin-left: 28.5%;margin-right: auto;">
+        <input matInput name="message" placeholder="Type a message..." [(ngModel)]="newMsg" maxlength="100">
+      </mat-form-field>
+
+      <div>
+        <button mat-button color="accent" type="submit" [disabled]="!newMsg">Send</button>
+        <button mat-button color="warn">Reset</button>
+      </div>
+    </form>
+
+    <!-- <div class="form">
+        <input class="input" [(ngModel)]="newMsg" maxlength="100" (keydown.enter)="submit(chat.id)">
+  
+        <button (click)="submit(chat.id)" class="button is-info" [disabled]="!newMsg">Send</button>
+      </div> -->
+  </div>
+  <!-- </ng-container> -->
+</ng-container>
