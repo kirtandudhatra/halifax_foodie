@@ -6,7 +6,6 @@ class FeedbackModel{
         return new Promise(async(resolve, reject) => {
             try {
                 feedbackData.feedbackId = await Utils.generateId(8);
-                console.log(feedbackData)
                 const params = {
                     TableName: "feedback",
                     Item: feedbackData
@@ -50,6 +49,28 @@ class FeedbackModel{
 
             } catch (error) {
                 console.error('Error in feedback model: getFeedbackByRestaurantId', error);
+                reject();
+            }
+        });
+    }
+
+    static async getAllFeedbacks() {
+        return new Promise((resolve, reject) => {
+            try {
+                const params = {
+                    TableName: "feedback"
+                };
+                db.scan(params, function(err, data) {
+                    if (err) {
+                        console.error('Error in feedback model: getAllFeedbacks', err);
+                        reject();
+                    } else {
+                        resolve(data["Items"]);
+                    }
+                });
+
+            } catch (error) {
+                console.error('Error in feedback model: getAllFeedbacks', error);
                 reject();
             }
         });

@@ -16,12 +16,51 @@ const client = new ComprehendClient(
     }
 );
 
+
+const { google } = require("googleapis");
+
+
 class FeedbackController {
     static async create(req, res) {
         try {
             const reqData = req.body;
 
             await FeedbackModel.create(reqData);
+
+            let extractedEntities = [];
+
+            let entities = reqData.feedback.match(/(\b[A-Z][a-z]+)/g);
+
+            for (let j = 0; j < entities.length; j++) {
+                extractedEntities.push(entities[j]);
+            }
+
+            const auth = new google.auth.GoogleAuth({
+                keyFile: "./config/credentials.json",
+                scopes: "https://www.googleapis.com/auth/spreadsheets",
+            });
+            const gClient = auth.getClient();
+            const googleSheets = google.sheets({ version: "v4", auth: gClient });
+            const spreadsheetId = "1-MLiLDWZWPNyeR1rPv9JLvMmmo4a_zCaa-kbfuqhx38";
+
+            const googleSheetCall = async (entity) => {
+                await googleSheets.spreadsheets.values.append({
+                    auth,
+                    spreadsheetId,
+                    range: "Sheet1!A:Z",
+                    valueInputOption: "USER_ENTERED",
+                    resource: {
+                        values: [[entity]]
+                    },
+                });
+            }
+
+            let functionCalls = [];
+            for (let i = 0; i < extractedEntities.length; i++) {
+                functionCalls.push(googleSheetCall(extractedEntities[i]));
+            }
+            await Promise.all(functionCalls);
+
             return res.sendResponse({
                 success: true,
                 message: 'Feedback created!'
