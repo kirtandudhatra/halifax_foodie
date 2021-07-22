@@ -32,3 +32,9 @@
     font-size: large;
     font-weight: bold;
   }
+
+  .top{
+    float: left;
+    width: 20%;
+    min-height: 10%;
+  }

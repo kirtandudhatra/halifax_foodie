@@ -2,7 +2,7 @@
 <mat-horizontal-stepper labelPosition="bottom" #stepper> 
   <mat-step [stepControl]="CreadentialFormGroup">
     <form [formGroup]="CreadentialFormGroup" (submit)="callFireBase(stepper)">
-      <ng-template matStepLabel>Fill out your name</ng-template>
+      <ng-template matStepLabel>Enter your credentials</ng-template>
       <mat-form-field appearance="fill">
         <mat-label>Email</mat-label>
         <input matInput placeholder="Email" formControlName="email" required>
@@ -34,3 +34,5 @@
     </form>
   </mat-step>
 </mat-horizontal-stepper>
+
+<button mat-raised-button style="margin-left: 12%;" color="accent" [routerLink]="'/register'">Register</button>

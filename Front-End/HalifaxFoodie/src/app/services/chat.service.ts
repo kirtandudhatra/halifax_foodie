@@ -10,13 +10,13 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class ChatService {
-
+  chatId = "QVPa0JeYkcMDFgShsEXs"
   constructor(private dataservice: DataService, private afs: AngularFirestore, private router: Router) { }
 
   get(chatId) {
     return this.afs
       .collection<any>('chats')
-      .doc(chatId)
+      .doc(this.chatId)
       .snapshotChanges()
       .pipe(
         map(doc => {
@@ -26,10 +26,7 @@ export class ChatService {
   }
 
   async create() {
-    const uid = this.dataservice.userData.userId
-
     const data = {
-      uid,
       createdAt: Date.now(),
       count: 0,
       messages: []
@@ -40,40 +37,51 @@ export class ChatService {
     return this.router.navigate(['/main/connect', docRef.id])
   }
 
-  async sendMessage(chatId, content) {
-    debugger
-    const uid = this.dataservice.userData.userId
+  async sendMessage(receiverUID, receiverNm, content) {
+    var receiverName, senderName, receiverUid, senderUid
+    if(this.dataservice.userData.role == "A"){
+      senderName = "Representative"
+      receiverName = receiverNm
+      senderUid = "REPO"
+      receiverUid = receiverUID
+    }
+    else{
+      senderName = this.dataservice.userData.lastName +", "+ this.dataservice.userData.firstName
+      receiverName = "Representative"
+      senderUid = this.dataservice.userData.userId
+      receiverUid = "REPO"
+
+    }
 
     const data = {
-      uid,
+      receiverName, 
+      senderName, 
+      receiverUid, 
+      senderUid,
       createdAt: Date.now(),
       content
     }
 
-    if (uid) {
-      const ref = this.afs.collection('chats').doc(chatId)
+    if (senderUid || receiverUid) {
+      const ref = this.afs.collection('chats').doc(this.chatId)
 
       return ref.update({
         messages: firebase.default.firestore.FieldValue.arrayUnion(data)
       })
     }
-
   }
 
   async deleteMessage(chat, msg) {
-    const uid = this.dataservice.userData.userId;
+    const senderUid = this.dataservice.userData.userId;
 
     const ref = this.afs.collection('chats').doc(chat.id);
-    console.log(chat);
-    console.log(msg);
-    console.log(uid);
-    if (chat.uid === uid || msg.uid === uid) {
+    //if (chat.senderUid === uid || msg.senderUid === uid) {
       // Allowed to delete
       delete msg.user;
       return ref.update({
         messages: firebase.default.firestore.FieldValue.arrayRemove(msg)
       });
-    }
+    //}
   }
 
   joinUsers(chat$: Observable<any>) {
@@ -84,7 +92,7 @@ export class ChatService {
       switchMap(c => {
         // Unique User IDs
         chat = c;
-        const uids = Array.from(new Set(c.messages.map(v => v.uid)));
+        const uids = Array.from(new Set(c.messages.map(v => v.senderUid)));
 
         // Firestore User Doc Reads
         // const userDocs = uids.map(u =>
@@ -94,9 +102,9 @@ export class ChatService {
         return uids.length ? combineLatest(uids) : of([]);
       }),
       map(arr => {
-        arr.forEach(v => (joinKeys[(<any>v).uid] = v));
+        arr.forEach(v => (joinKeys[(<any>v).senderUid] = v));
         chat.messages = chat.messages.map(v => {
-          return { ...v, user: joinKeys[v.uid] };
+          return { ...v, user: joinKeys[v.senderUid] };
         });
 
         return chat;
