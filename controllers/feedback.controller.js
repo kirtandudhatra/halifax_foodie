@@ -16,9 +16,7 @@ const client = new ComprehendClient(
     }
 );
 
-
 const { google } = require("googleapis");
-
 
 class FeedbackController {
     static async create(req, res) {
