@@ -34,9 +34,9 @@ class FeedbackModel{
                     TableName: "feedback",
                     FilterExpression: "#restaurantId = :restaurantId_val",
                     ExpressionAttributeNames: {
-                        "#restaurantId": "restaurantId",
+                        "#restaurantId": "restCode",
                     },
-                    ExpressionAttributeValues: { ":restaurantId_val": restaurantId }
+                    ExpressionAttributeValues: { ":restaurantId_val": parseInt(restaurantId) }
                 };
                 db.scan(params, function(err, data) {
                     if (err) {

@@ -33,6 +33,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 import { AddRestaurantComponent } from './components/add-restaurant/add-restaurant.component';
 import { AddDishComponent } from './components/add-dish/add-dish.component';
+import { ReportComponent } from './components/report/report.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { AddDishComponent } from './components/add-dish/add-dish.component';
     FeedbackAnalysisComponent,
     RecipeUploaderComponent,
     AddRestaurantComponent,
-    AddDishComponent
+    AddDishComponent,
+    ReportComponent
   ],
   imports: [
     BrowserModule,

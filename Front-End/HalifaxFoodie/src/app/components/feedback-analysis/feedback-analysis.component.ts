@@ -23,7 +23,7 @@ export class FeedbackAnalysisComponent implements OnInit {
   }
 
   Search(){
-    this.httpservice.getServiceCall("/feedback/getFeedbackAnalysis/" + this.FeedbackForm.value.rest)
+    this.httpservice.getServiceCall("/feedback/feedbackAnalysis/" + this.FeedbackForm.value.rest)
       .subscribe((result: any)=>{
         console.log(result)
         if(result.success){

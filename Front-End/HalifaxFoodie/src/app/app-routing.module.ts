@@ -9,6 +9,7 @@ import { MainComponent } from './components/main/main.component';
 import { MessengerComponent } from './components/messenger/messenger.component';
 import { OrderComponent } from './components/order/order.component';
 import { RegisterComponent } from './components/register/register.component';
+import { ReportComponent } from './components/report/report.component';
 import { RestrauntComponent } from './components/restraunt/restraunt.component';
 import { SigninComponent } from './components/signin/signin.component';
 
@@ -25,6 +26,7 @@ const routes: Routes = [
     { path: 'add-rest', component: AddRestaurantComponent },
     { path: 'feedback', component: FeedbackComponent },
     { path: 'feedback-analysis', component: FeedbackAnalysisComponent },
+    { path: 'report', component: ReportComponent },
     { path: 'connect/:id', component: MessengerComponent },
   ]}
 ];
