@@ -48,7 +48,6 @@ recvNameList: any[] = []
           this.recvUidList.push(o.senderUid)
           }
   
-
         if(this.dataservice.userData.role == "A" && ((o.senderUid == this.selectedRecvUid && o.receiverUid== "REPO") ||(o.senderUid == "REPO" && o.receiverUid== this.selectedRecvUid))){
           this.messages.push(o)
         }
@@ -59,9 +58,9 @@ recvNameList: any[] = []
         }
       });
 
-      console.log(this.selectedRecvName)
-      console.log(this.allMeassages)
-      console.log(this.messages)
+      // console.log(this.selectedRecvName)
+      // console.log(this.allMeassages)
+      // console.log(this.messages)
 
     },(error)=>{
       console.log(error)

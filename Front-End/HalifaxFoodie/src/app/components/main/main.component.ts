@@ -11,7 +11,7 @@ import { DataService } from 'src/app/services/data.service';
 export class MainComponent implements OnInit {
   openChat: boolean= false
   userChats$;
-  constructor(private dataservice: DataService, private router: Router, public cs: ChatService) { }
+  constructor(public dataservice: DataService, private router: Router, public cs: ChatService) { }
 
   ngOnInit(): void {
     if(this.dataservice && !this.dataservice.userData ){

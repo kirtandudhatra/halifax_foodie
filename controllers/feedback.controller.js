@@ -23,8 +23,8 @@ class FeedbackController {
             await FeedbackModel.create(reqData);
 
             let extractedEntities = [];
-
-            let entities = reqData.feedback.match(/(\b[A-Z][a-z]+)/g);
+            console.log(reqData.feedback)
+            let entities = reqData.feedback.match(/(\b[A-Z][A-Z]+)/g);
 
             for (let j = 0; j < entities.length; j++) {
                 extractedEntities.push(entities[j]);

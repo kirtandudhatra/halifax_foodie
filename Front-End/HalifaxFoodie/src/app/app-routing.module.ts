@@ -8,6 +8,7 @@ import { FeedbackComponent } from './components/feedback/feedback.component';
 import { MainComponent } from './components/main/main.component';
 import { MessengerComponent } from './components/messenger/messenger.component';
 import { OrderComponent } from './components/order/order.component';
+import { RecipeUploaderComponent } from './components/recipe-uploader/recipe-uploader.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ReportComponent } from './components/report/report.component';
 import { RestrauntComponent } from './components/restraunt/restraunt.component';
@@ -27,6 +28,7 @@ const routes: Routes = [
     { path: 'feedback', component: FeedbackComponent },
     { path: 'feedback-analysis', component: FeedbackAnalysisComponent },
     { path: 'report', component: ReportComponent },
+    { path: 'recipe-checker', component: RecipeUploaderComponent },
     { path: 'connect/:id', component: MessengerComponent },
   ]}
 ];

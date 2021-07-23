@@ -56,7 +56,7 @@ export class OrderComponent implements OnInit {
 
   placeOrder(){
     if(this.orderList.length == 0){
-      alert("Please add order to the list")
+      alert("Please add order to the cart")
       return
     }
     else{

@@ -14,12 +14,21 @@ export class FeedbackAnalysisComponent implements OnInit {
   restList: any[] = [{name:"The Bicycle Thief", code: 1}, {name:"McKelvies Restaurant", code: 2}, {name:"2 Doors Down Food", code: 3}]
   FeedbackForm!: FormGroup;
 
-  constructor(private httpservice: HttpService, private formBuilder: FormBuilder, private dataservice: DataService, private router: Router) { }
+  constructor(private httpservice: HttpService, private formBuilder: FormBuilder, public dataservice: DataService, private router: Router) { }
 
   ngOnInit(): void {
+    var value = ""
+    if(this.dataservice.userData.role == 'R'){
+      value = this.dataservice.userData.restCode
+    } 
     this.FeedbackForm = this.formBuilder.group({
-      rest: ['', [Validators.required]],
+      rest: [value, [Validators.required]],
     });
+
+    if(this.dataservice.userData.role == 'R'){
+      this.Search()
+    } 
+
   }
 
   Search(){

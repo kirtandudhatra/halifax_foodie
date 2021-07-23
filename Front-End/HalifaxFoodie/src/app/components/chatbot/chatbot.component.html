@@ -1,7 +1,12 @@
 <div style="height: 100%;">
     <div style="height: 69%; overflow-y: auto;" name="dvMsg" #dvMsg [scrollTop]="dvMsg.scrollHeight">
         <div>
-            <p *ngFor='let m of chatMessages' class="{{m.Owner}}" innerHTML="{{m.Owner}}: {{m.Message}}"></p>
+            <p *ngFor='let m of chatMessages' class="{{m.Owner}}" >
+                <span *ngIf="!m.Message.includes('/main/connect')" innerHTML="{{m.Owner}}: {{m.Message}}"></span>
+                <button mat-button class="menu-button" *ngIf="m.Message.includes('/main/connect')" [routerLink]="'/main/connect/QVPa0JeYkcMDFgShsEXs'">
+                    Chat Now
+                  </button>   
+            </p>
         </div>
     </div>
     

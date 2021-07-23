@@ -70,6 +70,11 @@ export class SigninComponent implements OnInit {
 
 
     if(Q1 == this.userData.Q1 && Q2 == this.userData.Q2){
+      if(this.userData.role != "A" && this.userData.role != "C" ){
+        this.userData.restCode = this.userData.role
+        this.userData.role = "R"
+      }
+  
       this.dataservice.setLoggedinUser( this.userData)
       localStorage.setItem("userData", JSON.stringify(this.userData))
       this.router.navigateByUrl("/main")

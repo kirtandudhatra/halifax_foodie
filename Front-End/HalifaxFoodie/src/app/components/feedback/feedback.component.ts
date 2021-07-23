@@ -45,7 +45,7 @@ export class FeedbackComponent implements OnInit {
     .subscribe((result: any)=>{
       console.log(result)
       if(result.success){
-        alert("Order Successfully Placed.")
+        alert("Feedback Successfully Submitted.")
         this.router.navigateByUrl('/main/restraunt')
       }
       else{

@@ -49,7 +49,7 @@ export class AddDishComponent implements OnInit {
       .subscribe((result: any)=>{
         console.log(result)
         if(result.success){
-          alert("Restaurant Add Successfully")
+          alert("Dish Added Successfully")
           this.AddDishFormGroup.reset()
         }
       }, (error)=>{

@@ -1,18 +1,19 @@
 <h2>Feedback Analysis</h2>
 
-<form (submit)="Search()" [formGroup]="FeedbackForm" style="padding-left: 20%;">
+<form (submit)="Search()" [formGroup]="FeedbackForm" style="padding-left: 20%;"
+    *ngIf="dataservice?.userData.role == 'A' ">
     <mat-form-field class="restList" appearance="fill">
         <mat-label>Restaurant</mat-label>
         <mat-select formControlName="rest">
-          <mat-option *ngFor="let rest of restList" [value]="rest.code">
-            {{rest.name}}
-          </mat-option>
+            <mat-option *ngFor="let rest of restList" [value]="rest.code">
+                {{rest.name}}
+            </mat-option>
         </mat-select>
-      </mat-form-field>
+    </mat-form-field>
 
-      <br>
-      <button mat-button type="submit">Search</button>
-    </form>
+    <br>
+    <button mat-button type="submit">Search</button>
+</form>
 <table *ngIf="feedbackList.length > 0">
     <thead>
         <th>
