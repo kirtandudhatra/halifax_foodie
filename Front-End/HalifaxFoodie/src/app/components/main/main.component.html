@@ -14,22 +14,17 @@
       <button mat-button class="menu-button" [routerLink]="'/main/feedback-analysis'">
         Feedback Analysis
       </button>
-      <button mat-button class="menu-button" [routerLink]="'/main/connect/QVPa0JeYkcMDFgShsEXs'">
-        go to chat
-      </button>
-      <button mat-button class="menu-button" (click)="createChat()">
-        Create Chat
-      </button>
-      <button mat-button class="menu-button" (click)="getChat()">
-        Get Chat
-      </button>
+
           <span class="spacer"></span>
 
     <button mat-icon-button (click)="openChat = !openChat">
         <mat-icon> chat_bubble_outline</mat-icon>
     </button>
-    <button mat-icon-button  (click)="logout()">
-      <mat-icon>add_shopping_cart</mat-icon>
+    <button mat-icon-button  [routerLink]="'/main/connect/QVPa0JeYkcMDFgShsEXs'">
+      <mat-icon>contact_support</mat-icon>
+  </button>
+  <button mat-icon-button  (click)="logout()">
+    <mat-icon>exit_to_app</mat-icon>
   </button>
   </mat-toolbar>
 
