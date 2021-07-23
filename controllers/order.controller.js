@@ -1,5 +1,6 @@
 const Exception = require('../lib/exceptions');
 const OrderModel = require('../model/order.model');
+const { google } = require("googleapis");
 
 class OrderController {
     static async placeOrder(req, res) {
@@ -7,6 +8,25 @@ class OrderController {
             const reqData = req.body;
 
             const orderId = await OrderModel.placeOrder(reqData);
+
+            const auth = new google.auth.GoogleAuth({
+                keyFile: "./config/credentials.json",
+                scopes: "https://www.googleapis.com/auth/spreadsheets",
+            });
+
+            const gClient = auth.getClient();
+            const googleSheets = google.sheets({ version: "v4", auth: gClient });
+            const spreadsheetId = "1L0PxarNxvNieRY0xjgPFudv76u3I-XacRcQpH32n0-I";
+            await googleSheets.spreadsheets.values.append({
+                auth,
+                spreadsheetId,
+                range: "Sheet1!A:Z",
+                valueInputOption: "USER_ENTERED",
+                resource: {
+                    values: [[new Date().toISOString().split('T')[0],orderId]]
+                },
+            });
+
             return res.sendResponse({
                 success: true,
                 message: 'Order Placed',
