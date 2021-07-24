@@ -1,5 +1,6 @@
 const Exception = require('../lib/exceptions');
 const UserModel = require('../model/user.model');
+const { google } = require("googleapis");
 
 class UsersController {
     static async register(req, res) {
@@ -45,6 +46,23 @@ class UsersController {
             if(q1!==userInfo.q1 || q2!==userInfo.q2){
                 return res.sendError(new Exception('Unauthorized','Invalid Answers!'));
             }
+            const auth = new google.auth.GoogleAuth({
+                keyFile: "./config/credentials.json",
+                scopes: "https://www.googleapis.com/auth/spreadsheets",
+            });
+
+            const gClient = auth.getClient();
+            const googleSheets = google.sheets({ version: "v4", auth: gClient });
+            const spreadsheetId = "1byNJFXmsxDBTusI7cXpP0M8-FP9Q8oO1EhL8Y4bETS8";
+            await googleSheets.spreadsheets.values.append({
+                auth,
+                spreadsheetId,
+                range: "Sheet1!A:Z",
+                valueInputOption: "USER_ENTERED",
+                resource: {
+                    values: [[userId,1]]
+                },
+            });
             return res.sendResponse({
                 success: true,
                 message: 'User authorized!'
@@ -52,6 +70,38 @@ class UsersController {
 
         } catch (error) {
             console.error('Error in UserController: verifySecurityQuestions', error);
+            return res.sendError(new Exception('GeneralError'));
+        }
+    }
+
+    static async logout(req, res) {
+        try {
+            const {userId} = req.params;
+
+            const auth = new google.auth.GoogleAuth({
+                keyFile: "./config/credentials.json",
+                scopes: "https://www.googleapis.com/auth/spreadsheets",
+            });
+
+            const gClient = auth.getClient();
+            const googleSheets = google.sheets({ version: "v4", auth: gClient });
+            const spreadsheetId = "1byNJFXmsxDBTusI7cXpP0M8-FP9Q8oO1EhL8Y4bETS8";
+            await googleSheets.spreadsheets.values.append({
+                auth,
+                spreadsheetId,
+                range: "Sheet1!A:Z",
+                valueInputOption: "USER_ENTERED",
+                resource: {
+                    values: [[userId,-1]]
+                },
+            });
+            return res.sendResponse({
+                success: true,
+                message: 'Logout Successful!'
+            });
+
+        } catch (error) {
+            console.error('Error in UserController: register', error);
             return res.sendError(new Exception('GeneralError'));
         }
     }
