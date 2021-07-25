@@ -13,6 +13,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { ReportComponent } from './components/report/report.component';
 import { RestrauntComponent } from './components/restraunt/restraunt.component';
 import { SigninComponent } from './components/signin/signin.component';
+import { WelcomeComponent } from './components/welcome/welcome.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'signin', pathMatch: 'full' },
@@ -20,7 +21,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'report', component: ReportComponent },
   { path: 'main', component: MainComponent, children:[
-    { path: '', redirectTo: 'restraunt', pathMatch: 'full' },
+    { path: '', redirectTo: 'welcome', pathMatch: 'full' },
+    { path: 'welcome', component: WelcomeComponent },
     { path: 'restraunt', component: RestrauntComponent },
     { path: 'orders', component: OrderComponent },
     { path: 'cart', component: CartComponent },

@@ -34,6 +34,7 @@ import { environment } from '../environments/environment';
 import { AddRestaurantComponent } from './components/add-restaurant/add-restaurant.component';
 import { AddDishComponent } from './components/add-dish/add-dish.component';
 import { ReportComponent } from './components/report/report.component';
+import { WelcomeComponent } from './components/welcome/welcome.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { ReportComponent } from './components/report/report.component';
     RecipeUploaderComponent,
     AddRestaurantComponent,
     AddDishComponent,
-    ReportComponent
+    ReportComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
 import { HttpService } from 'src/app/services/http.service';
+import { UtilityService } from 'src/app/services/utility.service';
 
 @Component({
   selector: 'app-order',
@@ -15,9 +16,11 @@ export class OrderComponent implements OnInit {
   totalPrice: number = 0
   foodList: any[] = [{name: "Burger", price: 2},{name: "Pizza", price: 1},{name: "Noodles", price: 3}];
   orderList: any[] = []
-  constructor(private httpservice: HttpService, private formBuilder: FormBuilder, private dataservice: DataService, private router: Router) { }
+  constructor(private util: UtilityService, private httpservice: HttpService, private formBuilder: FormBuilder, private dataservice: DataService, private router: Router) { }
 
   ngOnInit(): void {
+    this.util.isLoader = false
+
     if (!this.dataservice.selectedRest) {
       this.router.navigateByUrl('/main/restraunt')
     }
@@ -70,8 +73,12 @@ export class OrderComponent implements OnInit {
         totalPrice: this.totalPrice,
         status: stat
       }
+      this.util.isLoader = false
+
       this.httpservice.postServiceCall("/order/placeorder",req)
       .subscribe((result: any)=>{
+        this.util.isLoader = false
+
         console.log(result)
         if(result.success){
           alert("Order Successfully Placed. Your order number is " + result.data)
@@ -81,6 +88,8 @@ export class OrderComponent implements OnInit {
           
         }
       }, (error: any)=>{
+        this.util.isLoader = false
+
         console.log(error)
         alert("Something went wrong!")
       })

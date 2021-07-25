@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class HttpService {
-  URL: string = "http://localhost:5000/api"
+  URL: string = "https://hfbackend-qzcrbvfi4q-ue.a.run.app/"
   constructor(private http: HttpClient) { }
 
   getServiceCall(path: string){

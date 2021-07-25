@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
 import { HttpService } from 'src/app/services/http.service';
+import { UtilityService } from 'src/app/services/utility.service';
 
 @Component({
   selector: 'app-restraunt',
@@ -11,9 +12,11 @@ import { HttpService } from 'src/app/services/http.service';
 export class RestrauntComponent implements OnInit {
 
   restList: any = []
-  constructor(private httpservice: HttpService, private dataservice: DataService, private router : Router) { }
+  constructor(private util: UtilityService,private httpservice: HttpService, private dataservice: DataService, private router : Router) { }
 
   ngOnInit(): void {
+    this.util.isLoader = false
+
   }
 
   getrest(){

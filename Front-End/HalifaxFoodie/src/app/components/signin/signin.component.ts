@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { HttpService } from 'src/app/services/http.service';
+import { UtilityService } from 'src/app/services/utility.service';
 
 @Component({
   selector: 'app-signin',
@@ -17,9 +18,11 @@ export class SigninComponent implements OnInit {
   firebaseRes: any
   token:any
   userData: any
-  constructor(private dataservice: DataService, private router: Router, private _formBuilder: FormBuilder, private httpservice: HttpService, private firebaseservice: FirebaseService) { }
+  constructor(private util: UtilityService, private dataservice: DataService, private router: Router, private _formBuilder: FormBuilder, private httpservice: HttpService, private firebaseservice: FirebaseService) { }
 
   ngOnInit(): void {
+    this.util.isLoader = false
+
     this.CreadentialFormGroup = this._formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required]
@@ -35,28 +38,37 @@ export class SigninComponent implements OnInit {
     if(this.CreadentialFormGroup.invalid ){
       return
     }
- 
+    this.util.isLoader = true
+
     this.firebaseservice.signin(this.CreadentialFormGroup.value)
     .then(res => {
       this.firebaseRes = res.user.uid
       if(this.firebaseRes){
         this.httpservice.getServiceCall("/user/getUserData/"+this.firebaseRes)
         .subscribe((result: any)=>{
+          this.util.isLoader = false
+
           console.log(result)
           if(result.success){
             this.userData = result.data
             stepper.next()
           }
         },(error)=>{
+          this.util.isLoader = false
+
           console.log(error)
           alert('Something went wrong')
         })        
         }
         else{
+          this.util.isLoader = false
+
           alert(res.message)
         }
       }, err => {
       console.log(err);
+      this.util.isLoader = false
+
     })    
   }
 

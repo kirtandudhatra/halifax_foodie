@@ -4,6 +4,7 @@ import { MatStepper } from '@angular/material/stepper';
 import { Router } from '@angular/router';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { HttpService } from 'src/app/services/http.service';
+import { UtilityService } from 'src/app/services/utility.service';
 
 @Component({
   selector: 'app-register',
@@ -15,9 +16,11 @@ export class RegisterComponent implements OnInit {
   DetailsFormGroup: FormGroup;
   firebaseRes: any
 
-  constructor(private router: Router, private _formBuilder: FormBuilder, private httpservice: HttpService, private firebaseservice: FirebaseService) { }
+  constructor(private util: UtilityService, private router: Router, private _formBuilder: FormBuilder, private httpservice: HttpService, private firebaseservice: FirebaseService) { }
 
   ngOnInit(): void {
+    this.util.isLoader = false
+
     this.CreadentialFormGroup = this._formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required]
@@ -35,9 +38,12 @@ export class RegisterComponent implements OnInit {
     if(this.CreadentialFormGroup.invalid || this.firebaseRes){
       return
     }
- 
+    this.util.isLoader = true
+
     this.firebaseservice.register(this.CreadentialFormGroup.value)
     .then(res => {
+      this.util.isLoader = false
+
       this.firebaseRes = res.user.uid
       if(this.firebaseRes){
       stepper.next()
@@ -46,6 +52,8 @@ export class RegisterComponent implements OnInit {
         alert(res.message)
       }
     }, err => {
+      this.util.isLoader = false
+
       console.log(err);
     })    
   }
@@ -64,14 +72,20 @@ export class RegisterComponent implements OnInit {
       Q1: this.DetailsFormGroup.value.Q1,
       Q2: this.DetailsFormGroup.value.Q2
     }
+    this.util.isLoader = true
+
     this.httpservice.postServiceCall("/user/register",req)
     .subscribe((result: any)=>{
+      this.util.isLoader = false
+
       console.log(result)
       if(result.success){
         alert("You have successfully registered")
         this.router.navigateByUrl("/signin")
       }
     },(error: any)=>{
+      this.util.isLoader = false
+
       console.log(error)
       alert("Something went wrong")
     })
