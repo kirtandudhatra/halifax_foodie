@@ -46,7 +46,7 @@ class OrderController {
             const orders = await OrderModel.getOrdersByRestaurantId(reqData.restaurantId);
             return res.sendResponse({
                 success: true,
-                message: 'Orders retrieved!',
+                message: 'Orders retrieved! ',
                 data: orders
             });
 
