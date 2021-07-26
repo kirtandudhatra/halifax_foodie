@@ -34,7 +34,7 @@ class RecipeModel{
     static async saveRecipe(recipeData) {
         return new Promise(async (resolve, reject) => {
             try {
-                recipeData.recipeId = await Utils.generateId(8);
+                recipeData.recipeCode = await Utils.generateId(8);
                 const params = {
                     TableName: "recipes",
                     Item: recipeData
