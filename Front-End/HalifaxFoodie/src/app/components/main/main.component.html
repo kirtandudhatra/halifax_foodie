@@ -25,9 +25,13 @@
     *ngIf="dataservice?.userData.role == 'A' ">
     Data Analysis Report
   </button>
-  <button mat-button class="menu-button" [routerLink]="'/main/recipe-checker'"
+  <button mat-button class="menu-button" [routerLink]="'/main/recipe-uploader'"
   *ngIf="dataservice?.userData.role == 'R' ">
-  Recipe Checker
+  Recipe Uploader
+</button>
+<button mat-button class="menu-button" [routerLink]="'/main/recipe-checker'"
+*ngIf="dataservice?.userData.role == 'R' ">
+Recipe Checker
 </button>
 
   <span class="spacer"></span>

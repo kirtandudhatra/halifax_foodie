@@ -20,7 +20,7 @@ export class MainComponent implements OnInit {
       try {
         var userdata = localStorage.getItem("userData")
         if(userdata){
-        this.dataservice.userData = JSON.parse(userdata)
+        this.dataservice.setLoggedinUser( JSON.parse(userdata))
         }
         else{
           this.router.navigateByUrl("/signin")
