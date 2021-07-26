@@ -32,12 +32,13 @@ export class MainComponent implements OnInit {
   }
 
   logout(){
-    this.dataservice.userData = null
-    localStorage.removeItem("userData")
     this.util.isLoader = true
-    this.httpservice.getServiceCall("user/logout/" + this.dataservice.userData.userId)
+    this.httpservice.getServiceCall("/user/logout/" + this.dataservice.userData.userId)
       .subscribe((result: any)=>{
         this.util.isLoader = false
+        this.dataservice.userData = null
+        localStorage.removeItem("userData")
+    
         this.router.navigateByUrl("/signin")
       },(error)=>{
         this.util.isLoader = false
