@@ -20,7 +20,7 @@ export class MainComponent implements OnInit {
       try {
         var userdata = localStorage.getItem("userData")
         if(userdata){
-        this.dataservice.userData = JSON.parse(userdata)
+        this.dataservice.setLoggedinUser( JSON.parse(userdata))
         }
         else{
           this.router.navigateByUrl("/signin")
@@ -32,12 +32,13 @@ export class MainComponent implements OnInit {
   }
 
   logout(){
-    this.dataservice.userData = null
-    localStorage.removeItem("userData")
     this.util.isLoader = true
-    this.httpservice.getServiceCall("user/logout/" + this.dataservice.userData.userId)
+    this.httpservice.getServiceCall("/user/logout/" + this.dataservice.userData.userId)
       .subscribe((result: any)=>{
         this.util.isLoader = false
+        this.dataservice.userData = null
+        localStorage.removeItem("userData")
+    
         this.router.navigateByUrl("/signin")
       },(error)=>{
         this.util.isLoader = false

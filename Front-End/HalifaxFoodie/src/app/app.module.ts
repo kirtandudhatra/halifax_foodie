@@ -35,6 +35,7 @@ import { AddRestaurantComponent } from './components/add-restaurant/add-restaura
 import { AddDishComponent } from './components/add-dish/add-dish.component';
 import { ReportComponent } from './components/report/report.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
+import { RecipeCheckerComponent } from './components/recipe-checker/recipe-checker.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
     AddRestaurantComponent,
     AddDishComponent,
     ReportComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    RecipeCheckerComponent
   ],
   imports: [
     BrowserModule,
