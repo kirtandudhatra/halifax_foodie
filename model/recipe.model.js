@@ -1,4 +1,5 @@
 const db = require('../lib/db-connection');
+const Utils = require('../lib/Utils');
 
 class RecipeModel{
 
@@ -25,6 +26,31 @@ class RecipeModel{
 
             } catch (error) {
                 console.error('Error in recipe model: getRecipeByRestaurantId', error);
+                reject();
+            }
+        });
+    }
+
+    static async saveRecipe(recipeData) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                recipeData.recipeId = await Utils.generateId(8);
+                const params = {
+                    TableName: "recipes",
+                    Item: recipeData
+                };
+                db.put(params, function(err, data) {
+                    if (err) {
+                        console.error('Error in Recipe model: saveRecipe', err);
+                        reject();
+                    } else {
+                        console.log("Added recipe item:", JSON.stringify(data));
+                        resolve();
+                    }
+                });
+
+            } catch (error) {
+                console.error('Error in Recipe model: saveRecipe', error);
                 reject();
             }
         });

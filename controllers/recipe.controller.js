@@ -60,6 +60,22 @@ class RecipeController {
             return res.sendError(new Exception('GeneralError'));
         }
     }
+
+    static async saveRecipe(req, res) {
+        try {
+            const reqData = req.body;
+
+            await RecipeModel.saveRecipe(reqData);
+            return res.sendResponse({
+                success: true,
+                message: 'Recipe saved!'
+            });
+
+        } catch (error) {
+            console.error('Error in RecipeController: saveRecipe', error);
+            return res.sendError(new Exception('GeneralError'));
+        }
+    }
 }
 
 module.exports = RecipeController;
