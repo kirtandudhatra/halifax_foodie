@@ -4,7 +4,7 @@
 <form (submit)="submit()" [formGroup]="FeedbackForm" style="padding-left: 20%;">
     <mat-form-field appearance="fill">
         <mat-label>Dish</mat-label>
-        <input matInput formControlName="food" type="number"
+        <input matInput formControlName="food" 
         placeholder="Dish Name">
         <mat-error *ngIf="FeedbackForm?.controls['food']?.errors?.required">Please seleect a dish</mat-error>
       </mat-form-field>

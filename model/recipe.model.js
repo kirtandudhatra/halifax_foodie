@@ -13,13 +13,14 @@ class RecipeModel{
                     ExpressionAttributeNames: {
                         "#restCode": "restCode",
                     },
-                    ExpressionAttributeValues: { ":restCode_val": parseInt(restCode) }
+                    ExpressionAttributeValues: { ":restCode_val": restCode }
                 };
                 db.scan(params, function(err, data) {
                     if (err) {
                         console.error('Error in recipe model: getRecipeByRestaurantId', err);
                         reject();
                     } else {
+                        console.log(data["Items"])
                         resolve(data["Items"]);
                     }
                 });

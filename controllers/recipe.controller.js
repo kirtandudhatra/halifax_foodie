@@ -33,7 +33,7 @@ class RecipeController {
             const buf = Buffer.from(JSON.stringify(reqData));
 
             const config = {
-                Bucket: 'hfrecipes',
+                Bucket: 'recipe-checker',
                 Key: await Utils.generateId(5)+".json",
                 Body: buf,
                 ContentEncoding: 'base64',

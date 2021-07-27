@@ -38,8 +38,8 @@ export class RecipeUploaderComponent implements OnInit {
       return
     }
     this.util.isLoader = true
-
-    this.httpservice.postServiceCall("/main/restraunt",req)
+    
+    this.httpservice.postServiceCall("/recipe/uploadRecipe",req)
     .subscribe((result: any)=>{
       this.util.isLoader = false
 

@@ -15,13 +15,13 @@ export class RecipeCheckerComponent implements OnInit {
   constructor(private util: UtilityService, private httpservice: HttpService, private formBuilder: FormBuilder, private dataservice: DataService, private router: Router) { }
 
   ngOnInit(): void {
-    this.getDish
+    this.getDish()
   }
 
   getDish(){
     this.util.isLoader = true
 
-    this.httpservice.getServiceCall("/dish/" + this.dataservice.selectedRestCode)
+    this.httpservice.getServiceCall("/recipe/getRecipeByRestaurant/" + this.dataservice.selectedRestCode)
     .subscribe((result: any)=>{
       this.util.isLoader = false
 
